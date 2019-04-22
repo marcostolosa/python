@@ -1,15 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import os
+import os, random
 
 
 def jogar():
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("*********************************")
     print("***Bem vindo ao jogo da Forca!***")
     print("*********************************")
 
-    palavra_secreta = "banana".upper()
-    letras_acertadas = ["_", "_", "_", "_", "_", "_"]
+    arquivo = open("lista.txt", "r")
+    palavras = []
+
+    for linha in arquivo:
+        linha = linha.strip().upper()
+        palavras.append(linha)
+    arquivo.close()
+
+    select = random.randrange(0,len(palavras))
+    palavra_secreta = palavras[select]
+
+    #palavra_secreta = input("Digite a palavra secreta:\n").upper()
+    letras_acertadas = ["_" for letra in palavra_secreta]
 
     enforcou = False
     acertou = False
